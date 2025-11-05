@@ -17,7 +17,7 @@ class IndexController extends Controller
 
         $posts = Post::whereIn('user_id', $userIds)
                     ->with([
-                        'user:id,name',
+                        'user:id,name,profile_image',
                         'likes' => function($query) use ($user){
                             $query->where('user_id', $user->id);
                         }

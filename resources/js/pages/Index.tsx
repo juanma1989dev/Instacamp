@@ -1,6 +1,9 @@
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { useInitials } from '@/hooks/use-initials';
 import PublicLayout from '@/layouts/public-layout';
 import { PageProps } from '@/types';
 import { Link, router, usePage } from '@inertiajs/react';
+import { AvatarFallback } from '@radix-ui/react-avatar';
 import { Heart, MessageCircle } from 'lucide-react';
 import React from 'react';
 import { route } from 'ziggy-js';
@@ -34,6 +37,8 @@ export default function Index({ posts }: Props) {
         router.delete(route('posts.destroy', postId));
     };
 
+    const getInitials = useInitials();
+
     return (
         <PublicLayout>
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -46,12 +51,23 @@ export default function Index({ posts }: Props) {
                             >
                                 {/* Header */}
                                 <div className="flex items-center justify-between px-4 py-2">
-                                    <div className="flex items-center">
-                                        <img
-                                            src="https://cdn.mos.cms.futurecdn.net/A5StMHAtwURwf59EAPbnvb-650-80.jpg.webp"
-                                            alt="Avatar"
-                                            className="mr-3 h-10 w-10 rounded-full object-cover"
-                                        />
+                                    <div className="flex items-center gap-4">
+                                        <Avatar className="h-8 w-8 rounded-full">
+                                            <AvatarImage
+                                                src={
+                                                    post?.user.profile_image
+                                                        ? `/storage/${post.user.profile_image}`
+                                                        : undefined
+                                                }
+                                                alt={post?.user.name}
+                                                className="object-cover"
+                                            />
+                                            <AvatarFallback className="flex h-full w-full items-center justify-center rounded-full bg-neutral-200 text-sm font-medium text-black dark:bg-neutral-700 dark:text-white">
+                                                {getInitials(
+                                                    post?.user.name || '',
+                                                )}
+                                            </AvatarFallback>
+                                        </Avatar>
                                         <span className="font-semibold text-gray-800 hover:text-indigo-600">
                                             {post?.user?.name}
                                         </span>
@@ -70,7 +86,6 @@ export default function Index({ posts }: Props) {
                                         </Link>
                                     )}
                                 </div>
-
                                 {/* Image */}
                                 <Link href={route('posts.edit', post.id)}>
                                     <img
@@ -80,7 +95,6 @@ export default function Index({ posts }: Props) {
                                         className="max-h-[420px] w-full bg-black object-contain"
                                     />
                                 </Link>
-
                                 {/* Body */}
                                 <div className="px-4 py-3">
                                     <div className="mb-2 flex items-center space-x-2">
