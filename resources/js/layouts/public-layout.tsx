@@ -54,12 +54,21 @@ export default function PublicLayout({
                         {/* Navegación principal */}
                         <div className="hidden md:flex md:items-center md:space-x-6">
                             {auth.user && (
-                                <Link
-                                    href={route('posts.index')}
-                                    className="text-gray-700 hover:text-indigo-600"
-                                >
-                                    Mis publicaciones
-                                </Link>
+                                <>
+                                    <Link
+                                        href={route('users.index')}
+                                        className="text-gray-700 hover:text-indigo-600"
+                                    >
+                                        Usuarios
+                                    </Link>
+
+                                    <Link
+                                        href={route('posts.index')}
+                                        className="text-gray-700 hover:text-indigo-600"
+                                    >
+                                        Mis publicaciones
+                                    </Link>
+                                </>
                             )}
                         </div>
 
