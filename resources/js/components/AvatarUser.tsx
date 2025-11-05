@@ -6,7 +6,7 @@ interface Props {
     textFallback: string;
 }
 
-export default function AvatarUser({ image, textFallback = '' }: Props) {
+export default function AvatarUser({ image = '', textFallback = '' }: Props) {
     const getInitials = useInitials();
 
     return (

@@ -1,5 +1,6 @@
+import AvatarUser from '@/components/AvatarUser';
 import PublicLayout from '@/layouts/public-layout';
-import { PageProps } from '@/types';
+import { PageProps, User } from '@/types';
 import { Link, router, usePage } from '@inertiajs/react';
 import { Trash } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
@@ -9,21 +10,14 @@ interface Comment {
     id: number;
     comment: string;
     user_id: number | null;
-    user?: {
-        name: string;
-        profile_photo_url?: string;
-    } | null;
+    user?: User;
 }
 
 interface Post {
     id: number;
     caption: string;
     image_url?: string;
-    user?: {
-        id: number;
-        username: string;
-        profile_photo_url?: string;
-    } | null;
+    user?: User;
     likes: { user_id: number }[];
     comments: Comment[];
     created_at: string;
@@ -103,16 +97,15 @@ export default function ShowPost({ post }: Props) {
                     <div className="relative mb-4 flex items-center border-b pb-3">
                         {post.user ? (
                             <>
-                                <img
-                                    src={
-                                        post.user.profile_photo_url ||
-                                        'https://via.placeholder.com/40'
-                                    }
-                                    className="mr-3 h-10 w-10 rounded-full"
-                                />
-                                <span className="font-semibold text-gray-800">
-                                    {post.user.username}
-                                </span>
+                                <div className="flex items-center justify-center gap-3">
+                                    <AvatarUser
+                                        image={post.user.profile_image ?? ''}
+                                        textFallback={post.user.name}
+                                    />
+                                    <span className="font-semibold text-gray-800">
+                                        {post.user.name}
+                                    </span>
+                                </div>
                                 {auth.user?.id === post.user.id && (
                                     <div
                                         ref={menuRef}
@@ -193,16 +186,15 @@ export default function ShowPost({ post }: Props) {
                             post.comments.map((comment) => (
                                 <div
                                     key={comment.id}
-                                    className="flex items-start gap-2"
+                                    className="flex items-center gap-2"
                                 >
-                                    <img
-                                        src={
-                                            comment.user?.profile_photo_url ||
-                                            'https://via.placeholder.com/32'
+                                    <AvatarUser
+                                        image={
+                                            comment.user?.profile_image ?? ''
                                         }
-                                        className="h-8 w-8 rounded-full"
+                                        textFallback={comment.user?.name ?? ''}
                                     />
-                                    <div className="flex-1">
+                                    <div className="flex flex-1">
                                         <p className="text-sm">
                                             <span className="mr-2 font-semibold">
                                                 {comment.user?.name ||
@@ -237,7 +229,7 @@ export default function ShowPost({ post }: Props) {
                         <input
                             type="text"
                             required
-                            placeholder="Add a comment..."
+                            placeholder="Agregar comentario .."
                             className="flex-1 rounded-l-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none"
                             value={commentInput}
                             onChange={(e) => setComment(e.target.value)}
