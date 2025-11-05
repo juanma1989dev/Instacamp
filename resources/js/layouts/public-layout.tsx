@@ -58,7 +58,7 @@ export default function PublicLayout({
                                     href={route('posts.index')}
                                     className="text-gray-700 hover:text-indigo-600"
                                 >
-                                    Feedssss
+                                    Mis publicaciones
                                 </Link>
                             )}
                         </div>
@@ -77,7 +77,7 @@ export default function PublicLayout({
                                         href={route('register')}
                                         className="text-gray-700 hover:text-indigo-600"
                                     >
-                                        Register
+                                        Registrarme
                                     </Link>
                                 </>
                             ) : (
@@ -87,7 +87,7 @@ export default function PublicLayout({
                                         className="flex items-center text-gray-700 hover:text-indigo-600"
                                     >
                                         <i className="fa fa-plus-square mr-1"></i>{' '}
-                                        New Post
+                                        Nueva publicación
                                     </Link>
 
                                     {/* Dropdown usuario */}
