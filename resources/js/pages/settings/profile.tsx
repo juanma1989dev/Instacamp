@@ -6,6 +6,7 @@ import { Form, Head, Link, usePage } from '@inertiajs/react';
 
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
+import ImageUploadField from '@/components/ImageUploadField';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -105,6 +106,14 @@ export default function Profile({
                                     <InputError
                                         className="mt-2"
                                         message={errors.bio}
+                                    />
+                                </div>
+
+                                <div>
+                                    <ImageUploadField
+                                        currentImage={`/storage/${auth.user.profile_image}`}
+                                        error={errors.avatar}
+                                        name="profile_image"
                                     />
                                 </div>
 
