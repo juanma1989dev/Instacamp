@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +10,8 @@ use Laravel\Fortify\Features;
 
 Route::resources([
     'posts' => PostController::class,
-    'likes' => LikeController::class
+    'likes' => LikeController::class,
+    'comments' => CommentController::class
 ]);
 
 Route::get('/', function () {

@@ -68,7 +68,11 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::with(['user', 'likes','comments.user'])->findOrFail($id);
+
+        return inertia('post/ShowPost', [
+            'post' => $post
+        ]); 
     }
 
     /**

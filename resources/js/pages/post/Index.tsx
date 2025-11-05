@@ -1,7 +1,7 @@
 import PublicLayout from '@/layouts/public-layout';
 import { PageProps } from '@/types';
 import { Link, router, usePage } from '@inertiajs/react';
-import { Heart } from 'lucide-react';
+import { Heart, MessageCircle } from 'lucide-react';
 import React from 'react';
 import { route } from 'ziggy-js';
 
@@ -104,7 +104,7 @@ export default function PostsIndex({ posts }: Props) {
                                             href={route('posts.show', post.id)}
                                             className="text-gray-600"
                                         >
-                                            <i className="far fa-comment"></i>
+                                            <MessageCircle className="h-5 w-5 cursor-pointer" />
                                         </Link>
                                     </div>
 
