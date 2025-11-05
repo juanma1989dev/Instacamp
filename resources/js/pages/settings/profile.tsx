@@ -38,7 +38,7 @@ export default function Profile({
                 <div className="space-y-6">
                     <HeadingSmall
                         title="Profile information"
-                        description="Update your name and email address"
+                        description="Actualiza tu perfil"
                     />
 
                     <Form
@@ -51,7 +51,7 @@ export default function Profile({
                         {({ processing, recentlySuccessful, errors }) => (
                             <>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">Name</Label>
+                                    <Label htmlFor="name">Nombre</Label>
 
                                     <Input
                                         id="name"
@@ -70,7 +70,7 @@ export default function Profile({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="email">Email address</Label>
+                                    <Label htmlFor="email">Correo</Label>
 
                                     <Input
                                         id="email"
@@ -86,6 +86,25 @@ export default function Profile({
                                     <InputError
                                         className="mt-2"
                                         message={errors.email}
+                                    />
+                                </div>
+
+                                <div className="grid gap-2">
+                                    <Label htmlFor="email">Bio</Label>
+
+                                    <Input
+                                        id="bio"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        defaultValue={auth.user.bio}
+                                        name="bio"
+                                        autoComplete="bio"
+                                        placeholder="Biografía"
+                                    />
+
+                                    <InputError
+                                        className="mt-2"
+                                        message={errors.bio}
                                     />
                                 </div>
 
@@ -121,7 +140,7 @@ export default function Profile({
                                         disabled={processing}
                                         data-test="update-profile-button"
                                     >
-                                        Save
+                                        Guardar
                                     </Button>
 
                                     <Transition
@@ -131,8 +150,8 @@ export default function Profile({
                                         leave="transition ease-in-out"
                                         leaveTo="opacity-0"
                                     >
-                                        <p className="text-sm text-neutral-600">
-                                            Saved
+                                        <p className="rounded bg-green-500 p-2 text-sm text-neutral-600 text-white">
+                                            Guardado
                                         </p>
                                     </Transition>
                                 </div>
