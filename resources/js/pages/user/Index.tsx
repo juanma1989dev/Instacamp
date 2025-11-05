@@ -1,6 +1,7 @@
-import { Avatar } from '@/components/ui/avatar';
+import AvatarUser from '@/components/AvatarUser';
 import { Button } from '@/components/ui/button';
 import PublicLayout from '@/layouts/public-layout';
+import { User } from '@/types';
 import { router } from '@inertiajs/react';
 import { Check, UserPlus } from 'lucide-react'; // 👈 Importamos íconos
 import { route } from 'ziggy-js';
@@ -9,16 +10,19 @@ interface Props {
     users: User[];
 }
 
-interface User {
-    id: number;
-    name: string;
-    description: string;
-    avatarUrl: string;
-    is_following: boolean;
-}
+// interface User {
+//     id: number;
+//     name: string;
+//     description: string;
+//     avatarUrl: string;
+//     is_following: boolean;
+// }
 
 export default function UserIndex({ users }: Props) {
-    const handleClickFollow = (userId: number, isFollowing: boolean) => {
+    const handleClickFollow = (
+        userId: number,
+        isFollowing: boolean | undefined,
+    ) => {
         if (isFollowing) {
             router.delete(route('follows.destroy', userId));
         } else {
@@ -29,29 +33,24 @@ export default function UserIndex({ users }: Props) {
     return (
         <PublicLayout>
             <div className="space-y-4 p-4">
-                {users.map((user) => (
+                {users.map((user: User) => (
                     <div
                         key={user.id}
                         className="flex items-center justify-between rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md"
                     >
                         {/* Avatar + Info */}
                         <div className="flex items-center space-x-4">
-                            <Avatar className="h-12 w-12">
-                                <img
-                                    src={
-                                        user.avatarUrl ||
-                                        'https://i.pravatar.cc/50'
-                                    }
-                                    alt={user.name}
-                                    className="rounded-full"
-                                />
-                            </Avatar>
+                            {/* 'https://i.pravatar.cc/50' */}
+                            <AvatarUser
+                                image={user.profile_image ?? ''}
+                                textFallback={user.name}
+                            />
                             <div>
                                 <h3 className="font-semibold text-gray-800">
                                     {user.name}
                                 </h3>
                                 <p className="text-sm text-gray-500">
-                                    {user.description}
+                                    {user.bio}
                                 </p>
                             </div>
                         </div>
