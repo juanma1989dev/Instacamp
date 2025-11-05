@@ -21,6 +21,7 @@ class PostController extends Controller
                     $query->where('user_id', $userId );
                 }
             ])
+            ->where('user_id', $userId)
             ->latest()
             ->get()
             ->map(function($post){

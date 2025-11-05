@@ -211,8 +211,7 @@ export default function ShowPost({ post }: Props) {
                                             {comment.comment}
                                         </p>
                                     </div>
-                                    {(auth.user?.id === comment.user_id ||
-                                        auth.user?.id === post.user?.id) && (
+                                    {auth.user?.id === comment.user_id && (
                                         <button
                                             onClick={() =>
                                                 handleDeleteComment(comment.id)
